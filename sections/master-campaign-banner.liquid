@@ -82,7 +82,7 @@ position:absolute; max-width:1230px; width:100%; padding:0 50px;  text-align:cen
 
 .banner_heading_section h4 span { font-size:44px; font-weight:400; display:block; }
 
-.banner_heading_section .code { border:2px solid #fff; padding:5px 20px; font-size:25px; display:block; margin:15px 0; color:#fff;  }
+.banner_heading_section .code { border:2px solid #fff; padding:5px 20px; font-size:25px; display:block; margin:20px 0 30px 0; color:#fff;  }
 .banner_heading_section .code  span {  font-weight: 700;text-transform:uppercase;  }
 
 
@@ -148,7 +148,6 @@ position:absolute; max-width:1230px; width:100%; padding:0 50px;  text-align:cen
 {%  if section.settings.afterpay != blank %}
 <span class="afterpay">  	<img src="{{ section.settings.afterpay | img_url:"large"}}" alt="After pay" />  </span>
 {% endif %}
-  <div class="_text">
 {%  if section.settings.text-2 != blank %}
 <h4> {{ section.settings.text-1 }} <span> {{ section.settings.text-2 }} </span>  </h4>
 {% endif %}
@@ -161,7 +160,7 @@ position:absolute; max-width:1230px; width:100%; padding:0 50px;  text-align:cen
 <a href="{{ section.settings.banner_button_url }}">{{ section.settings.banner_button_text }}</a>
 </div>
 {% endif %}
-</div>
+
   
 </div>
 </div>
@@ -180,11 +179,11 @@ position:absolute; max-width:1230px; width:100%; padding:0 50px;  text-align:cen
 </div>  
 </div>  
 </div> 
-{% if section.settings.top_banner_heading != blank %}
+
 <div class="master-top-bar">
 <div class="page-width"><p>{{ section.settings.top_banner_heading }}</p></div>
 </div>  
-{% endif %}
+
 {% if section.settings.banner_bar_heading != blank and section.settings.bar_sale_end_date != blank %}
 <div class="clearance_banner_bar">
 <div class="page-width">
@@ -241,7 +240,7 @@ $('.clearance_banner_bar').hide();
 {% endif %}
 {% schema %}
 {
-"name": "Master campaign Banner",
+"name": "Banner",
 "class":"master_banner",
 "settings": [
 {
@@ -329,12 +328,7 @@ $('.clearance_banner_bar').hide();
 "label":"Bar Font Color",
 "default":"#000"
 }
-],
-   "presets": [
-    {
-      "name": "Master campaign Banner"
-    }
-  ]
+]
 }
 {% endschema %}
 

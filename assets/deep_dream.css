@@ -1750,9 +1750,10 @@ img.review_placeholder {
       font-weight: bolder;
   }
   body.product_deepdream_new .grid__item.product__media-wrapper ul.slick-dots {
-      max-width: 171px;
+      max-width: 155px;
       overflow: hidden;
       margin: 0 auto 15px;
+      justify-content: flex-start !important;
   }
   body.product_deepdream_new .USP_icon {
       display: none !important;

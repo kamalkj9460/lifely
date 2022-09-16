@@ -7,7 +7,8 @@ if (typeof boostPFSConfig != 'undefined'
 	&& boostPFSConfig.general.isInitFilter === true) {
 	boostPFS.initFilter(); 
 } 
-BoostPFS.jQ(window).on('load', function(){
+setTimeout(function(){
+    boostPFS.init();
 	boostPFS.initSearchBox();
 	boostPFS.initAnalytics();
 });

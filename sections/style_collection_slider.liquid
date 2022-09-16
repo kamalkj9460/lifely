@@ -44,7 +44,7 @@
   <span class="pagingInfo_slider" id="pagingInfo_slider_{{forloop.index}}"></span>
   {% else %}
     <div class="shop_by_style_slider_desktop" id="shop_by_style_slider_desktop">
-      <img src="{{collection.image | img_url: 'master'}}" alt=""/>
+      <img srcset="{{ collection.image | img_url: 'master' }} 1536w,{{ collection.image | img_url: '1200x' }} 1280w,{{ collection.image | img_url: '720x' }} 768w,{{ collection.image | img_url: '360x'}} 320w" alt=""/>
     </div> 
   {% endif %} 
 </div>
@@ -65,8 +65,3 @@
   }
 {% endschema %}
 
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}

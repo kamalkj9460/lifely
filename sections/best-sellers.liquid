@@ -43,7 +43,6 @@
                                     height="{{ card_product.featured_media.height }}"
                                   >     
                                   </a>
-                                  <div class="quick-view-button" style="display:none;"><a class="quick-view" data-handle="{{ card_product.handle }}" href="javascript:void(0);">Quick View</a></div>
                               </div>
                             {%- endif -%}
                       		 {% assign productTags = card_product.tags | join: ', ' %}
@@ -92,7 +91,7 @@
                                   {% render 'bestseller-price', product: card_product, price_class: '' %}
                                   
                                 </div>
-                              </div>                        
+                              </div>
                             </div>	
                         {% endif %}
                   	 </div>  
@@ -146,7 +145,6 @@
                                     width="{{ card_product.featured_media.width }}"
                                     height="{{ card_product.featured_media.height }}" />                 
                               </a>
-                              
                               </div>
                             {%- endif -%}
                       		 {% assign productTags = card_product.tags | join: ', ' %}
@@ -279,8 +277,3 @@
   }
 {% endschema %}
 
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}

@@ -1,11 +1,11 @@
 
 	
 	<div class="mattress-review__main">
-    	<div class="mattress-review__inner" style="background-color:{% if section.settings.review_background_color != blank %}{{section.settings.review_background_color}}{% endif %}">
+    	<div class="mattress-review__inner" style="background-color:{% if section.settings.review_background_color != blank %}{{section.settings.review_background_color}} {% endif %}">
           	{% if section.settings.review_heading != blank or section.settings.review_subheading != blank %}
-          		<div class="mattress-review__head text-center">
+          		<div class="mattress-review__head text-center"> 
                 	{% if section.settings.review_heading != blank %}
-                  		<h2>{{section.settings.review_heading}}</h2>
+                  		<h2>{{section.settings.review_heading}}</h2> 
                   	{% endif %}
                   	{% if section.settings.review_subheading != blank %}
                   		<h2>{{section.settings.review_subheading}}</h2>
@@ -49,7 +49,7 @@
                   </ul>
             	</div>
           	{% endif %}
-          
+            {% comment %}
           	{% if section.settings.review_content != blank %}
           		<div class="mattress-review__content text-center">
                   <p>{{section.settings.review_content}}</p>  
@@ -61,6 +61,7 @@
                 	<img src="{{section.settings.review_image | img_url: "master"}}" alt="image">  
           		</div>
           	{% endif %}
+             
           	{% if section.blocks and section.blocks != blank %}
                 <div class="image_slider_review">
                   <div class="image-slider-contet">
@@ -76,7 +77,8 @@
                   </div>  
             	</div>  
              {% endif %}
-          	
+            {% endcomment %} 
+          	{% render 'judgeme_widgets', widget_type: 'judgeme_ugc_media_grid', concierge_install: false %}
           	{% if section.settings.review_shop_label != blank and section.settings.review_shop_link != blank %}
           		<div class="mattress-review__bottom-buuton text-center">
                   	<a href="{{ section.settings.review_shop_link }}">{{ section.settings.review_shop_label }}</a>

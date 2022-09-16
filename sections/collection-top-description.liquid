@@ -22,16 +22,16 @@
         </div>  
     </div> 
 {% endif %}
-<script>
-  jQuery(document).ready(function($){
-    $('.collection_top_description .top_content_item .desc-half .read-more-content').on('click', function(){
-        $(this).closest('.top_content_item').find('.desc-half').hide();
-        $(this).closest('.top_content_item').find('.desc-full').show();
+<script type="lazyload2">
+  setTimeout(function() {
+    jQuery('.collection_top_description .top_content_item .desc-half .read-more-content').on('click', function(){
+        jQuery(this).closest('.top_content_item').find('.desc-half').hide();
+        jQuery(this).closest('.top_content_item').find('.desc-full').show();
     })
 
-    $('.collection_top_description .top_content_item .desc-full .read-less-content').on('click', function(){
-        $(this).closest('.top_content_item').find('.desc-full').hide();
-        $(this).closest('.top_content_item').find('.desc-half').show();
+    jQuery('.collection_top_description .top_content_item .desc-full .read-less-content').on('click', function(){
+        jQuery(this).closest('.top_content_item').find('.desc-full').hide();
+        jQuery(this).closest('.top_content_item').find('.desc-half').show();
     })
   })
 </script>
@@ -48,9 +48,3 @@
 	]
   }
 {% endschema %}
-
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}

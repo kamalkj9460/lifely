@@ -28,17 +28,15 @@
         {%- assign enable_filter_tree_button_desktop_h = true -%}
       {%- endif -%}
 
-      {{ 'template-collection.css' | asset_url | stylesheet_tag }}
-      {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
-      {{ 'component-card.css' | asset_url | stylesheet_tag }}
-      {{ 'component-price.css' | asset_url | stylesheet_tag }}
-
-      <link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <link rel="stylesheet" data-href="{{ 'template-collection.css' | asset_url }}" as="style">
+      <link rel="stylesheet" data-href="{{ 'component-loading-overlay.css' | asset_url }}" as="style">
+      <link rel="stylesheet" data-href="{{ 'component-card.css' | asset_url }}" as="style">
+      <link rel="stylesheet" data-href="{{ 'component-price.css' | asset_url }}" as="style">
+      <link rel="stylesheet" data-href="{{ 'component-rte.css' | asset_url }}" as="style">
 
       <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
-
-      {{ 'component-facets.css' | asset_url | stylesheet_tag }}
-      <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+      <link rel="stylesheet" data-href="{{ 'component-facets.css' | asset_url }}" as="style">
+      <script type="lazyload2" data-src="{{ 'facets.js' | asset_url }}"></script>
 
       {%- paginate collection.products by section.settings.products_per_page -%}
       <div class="page-width collection-filters {% if current_tags.first != blank %}child_collection_cat {{ current_tags.first | handle }}{% else %}parentcollection_cat{% endif %}" id="main-collection-filters" data-id="{{ section.id }}">
@@ -126,7 +124,7 @@
       </div>
 
       <div class="boost-pfs-filter-load-more"></div>
-      <link rel="stylesheet" href="{{ 'component-pagination.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" data-href="{{ 'component-pagination.css' | asset_url }}">
       <noscript>{{ 'component-pagination.css' | asset_url | stylesheet_tag }}</noscript>
       <div class="boost-pfs-filter-bottom-pagination"></div>
       {%- endpaginate -%}

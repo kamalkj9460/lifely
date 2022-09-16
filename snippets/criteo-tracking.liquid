@@ -1,5 +1,5 @@
-<script type="text/javascript">
-  (function(){
+<script type="lazyload2">
+  setTimeout(function(){
     var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
     window.criteo_q = window.criteo_q || [];
     window.criteo_q.push(
@@ -28,7 +28,7 @@
           { event: "viewPage" , ecpplugin: "shopify-mc" }
         {% endif %}
     );
-    window.addEventListener('load', function() {
+    setTimeout(function(){
       // ajax request catching
       (function(open) {
         XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
@@ -104,5 +104,5 @@
         });
       }
     }, false);
-  })();
+  });
 </script>

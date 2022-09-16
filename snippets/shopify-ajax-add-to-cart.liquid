@@ -120,7 +120,7 @@
           	<div class="cart-habit-wrap">
               <div class="cart-habit-inner">
                   <div class="h-img">
-                    <img src="https://cdn.shopify.com/s/files/1/0562/7569/7706/files/image_142.png?v=1653035811" alt="image">
+                    <img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="https://cdn.shopify.com/s/files/1/0562/7569/7706/files/image_142.png?v=1653035811" alt="image">
                   </div>
                   <div class="h-content">
                     <h3>Together for the World</h3>
@@ -146,8 +146,8 @@
   
 </div>
 
- <script>
-        jQuery(document).ready(function($) {
+ <script type="lazyload2">
+        setTimeout(function() { 
           if ($(".product-form__buttons")[0]){
             $(window).bind('scroll', function() {
                var navHeight = $('.product-form__buttons').offset().top;
@@ -340,8 +340,11 @@
     </script>
 
 
+{%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
 	<script>
-	
+{%- else -%}
+	<script type="lazyload2">
+{%- endif -%}
       	const defaults = {
           cartModal: '.js-ajax-cart-modal', // classname
           cartModalContent: '.js-ajax-cart-modal-content', // classname
@@ -405,14 +408,15 @@
 
                   if (cart.item_count === 0) {
                       cartDrawerContent.innerHTML = 'Cart is empty';
-                      checkoutButton.classList.add('is-hidden');                  
-                      $('.product_mini_cart_header.phead-mobile .cart-items-count').html('(0 Items)');     
+                      checkoutButton.classList.add('is-hidden');
+                      $('a#cart-icon-bubble .cart-count-bubble span:first-child').html(0);
                       if($('a#cart-icon-bubble .cart-count-bubble').length){
                         $('a#cart-icon-bubble .cart-count-bubble span:first-child').html(0);
                       }else{
                         $('a#cart-icon-bubble').append('<div class="cart-count-bubble"><span aria-hidden="true">0</span><span class="visually-hidden">0 item</span></div>');
                       }
                       $('.custom_mini_cart_total').html('');
+                    
                   } else {
                       renderCart(cart);
                       $('.product_mini_cart_header.phead-mobile .cart-items-count').html('('+cart.item_count+' Items)');                      
@@ -533,7 +537,7 @@
             	
            
               const productRemove = '<div class="ajax-cart-item__remove ' + defaults.removeFromCartNoDot + '"><i class="fas fa-times"></i></div>';
-              const concatProductInfo = '<div class="ajax-cart-item__single" data-line="' + Number(index + 1) + '"><div class="minicart_product_image">'+productImage+'</div><div class="minicart_product_content" data-line="' + Number(index + 1) + '">' + productTitle  + productPrice + '<div class="mini_catr_options">'+product_varition+'</div>' + productQuantity +  '</div>'+productRemove+'</div>';
+              const concatProductInfo = '<div class="ajax-cart-item__single" data-line="' + Number(index + 1) + '"><div class="minicart_product_image">'+productImage+'</div><div class="minicart_product_content" data-line="' + Number(index + 1) + '">' + productTitle  + productPrice + '<div class="mini_catr_options">'+product_varition+'</div>' + productQuantity + productRemove + '</div></div>';
               cartDrawerContent.innerHTML = cartDrawerContent.innerHTML + concatProductInfo;
           }); 
    
@@ -621,7 +625,7 @@
           openCartOverlay();
       });
 
-      document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
           fetchCart();
       });
       

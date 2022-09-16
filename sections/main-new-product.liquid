@@ -1,18 +1,19 @@
 {% comment %}theme-check-disable TemplateLength{% endcomment %}
-{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
-{{ 'component-rte.css' | asset_url | stylesheet_tag }}
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
-{{ 'component-rating.css' | asset_url | stylesheet_tag }}
-{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'section-main-product.css' | asset_url }}" media="all">
+<link rel="stylesheet" data-href="{{ 'component-accordion.css' | asset_url }}" media="all">
+<link rel="stylesheet" data-href="{{ 'component-price.css' | asset_url }}" media="all">
+<link rel="stylesheet" data-href="{{ 'component-rte.css' | asset_url }}" media="all">
+<link rel="stylesheet" data-href="{{ 'component-slider.css' | asset_url }}" media="all">
+<link rel="stylesheet" data-href="{{ 'component-rating.css' | asset_url }}" media="all">
+<link rel="stylesheet" data-href="{{ 'component-loading-overlay.css' | asset_url }}" media="all">
+
  {%- liquid  
             assign min_price = product.price_min 
             assign max_price = product.price_max 
         %}
-<link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" data-href="{{ 'component-deferred-media.css' | asset_url }}" media="all">
 
-{%- style -%}
+<style>
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
@@ -24,7 +25,7 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-{%- endstyle -%}
+</style>
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 {% assign product.selected_or_first_available_variant = '' %}
@@ -558,7 +559,7 @@
                 {%- endform -%}
               </product-form>
               <div id="ISR_button">Notify Me</div>
-              {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+              <link rel="stylesheet" data-href="{{ 'component-pickup-availability.css' | asset_url }}" media="all">
 
               {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
 				
@@ -715,7 +716,7 @@
   {%- endfor -%}
 </section>
 
-{% javascript %}
+<script type="lazyload2">
   class ProductModal extends ModalDialog {
     constructor() {
       super();
@@ -750,7 +751,7 @@
   }
 
   if (!customElements.get('product-modal')) customElements.define('product-modal', ProductModal);
-{% endjavascript %}
+</script>
 
 {% if product.media.size > 0 %}
   <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>

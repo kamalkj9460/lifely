@@ -1003,44 +1003,44 @@
         </div>	
     </div>		
 </div>
- <script>
-		jQuery(document).ready(function($){
-			$('.slick-carousel-custom').slick({
-				infinite: true,
-				autoplay:true,
-				slidesToShow: 1, 
-				slidesToScroll: 1,
-				arrows: false, 
-				fade: true,
-				dots: false,
-                responsive: [
-                  {
-                    breakpoint: 767,
-                    settings: {
-                     adaptiveHeight:true
-                    }
-                  }
-                ]
-			});
-			$('.deep_dream_new_slider_section a.slider_arrow_count').click(function(e){
-				e.preventDefault();
-			});
-			$('.deep_dream_new_slider_section a.slider_arrow_count .slider_count').click(function(e){
-				e.preventDefault();
-				var slideno = $(this).closest('a').data('id');
-				$('.slick-carousel-custom').slick('slickGoTo', slideno - 1);
-				//$('a.slider_arrow_count.active').removeClass('active');
-				//$(this).closest('a').addClass('active');
-			});
-			
-			$('.slick-carousel-custom').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-			    var curent_slide = parseInt(nextSlide)+1;
-				$('a.slider_arrow_count.active').removeClass('active');
-				$('a.slider_arrow_count[data-id="'+curent_slide+'"]').addClass('active');
-			});
-		});
-		
-	</script> 
+<script type="lazyload2" data-src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script type="lazyload2">
+    setTimeout(function() {
+        $('.slick-carousel-custom').slick({
+            infinite: true,
+            autoplay:true,
+            slidesToShow: 1, 
+            slidesToScroll: 1,
+            arrows: false, 
+            fade: true,
+            dots: false,
+            responsive: [
+              {
+                breakpoint: 767,
+                settings: {
+                 adaptiveHeight:true
+                }
+              }
+            ]
+        });
+        $('.deep_dream_new_slider_section a.slider_arrow_count').click(function(e){
+            e.preventDefault();
+        });
+        $('.deep_dream_new_slider_section a.slider_arrow_count .slider_count').click(function(e){
+            e.preventDefault();
+            var slideno = $(this).closest('a').data('id');
+            $('.slick-carousel-custom').slick('slickGoTo', slideno - 1);
+            //$('a.slider_arrow_count.active').removeClass('active');
+            //$(this).closest('a').addClass('active');
+        });
+        
+        $('.slick-carousel-custom').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+            var curent_slide = parseInt(nextSlide)+1;
+            $('a.slider_arrow_count.active').removeClass('active');
+            $('a.slider_arrow_count[data-id="'+curent_slide+'"]').addClass('active');
+        });
+    });
+</script>
 {% else %}
   {% if product.metafields.slider_main.image != blank %}
     <div class="closer_like_slider_section">
@@ -1093,9 +1093,3 @@
 	]
   }
 {% endschema %}
-
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}

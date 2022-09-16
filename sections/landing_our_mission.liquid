@@ -1,10 +1,19 @@
 {% if section.settings.heading != blank or section.settings.sub_heading != blank %}
-   <style>
+   <style type="lazyload2">
 	{% if section.settings.half_image != blank %}
       .landing_our_mission{
           background:url({{section.settings.half_image | img_url:'master'}});
       } 
      {% endif %}
+    .landing_our_mission_content{
+     	background:url({{section.settings.icon_image | img_url:'master'}});
+        background-repeat: no-repeat;
+        background-position: top right;
+        background-size: 117px;
+        padding: 60px;
+     }
+  </style>
+  <style>
       .landing_our_mission{
           background-size: cover;
           background-repeat: no-repeat;
@@ -18,13 +27,7 @@
           max-width: 500px;
           margin: 0 0 0 auto;
       }
-     .landing_our_mission_content{
-     	background:url({{section.settings.icon_image | img_url:'master'}});
-        background-repeat: no-repeat;
-        background-position: top right;
-        background-size: 117px;
-        padding: 60px;
-     }
+     
      .landing_our_mission_content h4 {
         font-family: 'Gellix';
         font-style: normal;
@@ -117,8 +120,3 @@
   }
 {% endschema %}
 
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}

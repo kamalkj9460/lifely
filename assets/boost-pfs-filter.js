@@ -23,7 +23,7 @@ function inArray(needle, haystack) {
 }
 
 
-(function () {
+setTimeout(function () {
   var onSale = false,
     soldOut = false,
     priceVaries = false,
@@ -73,6 +73,7 @@ function inArray(needle, haystack) {
     if (!data) data = this.data;
     // Customize API data to get the Shopify data
     data = prepareShopifyData(data);
+
     // Get Template
     var itemHtml = boostPFSTemplate.productGridItemHtml;
     // Add Custom class
@@ -169,7 +170,7 @@ function inArray(needle, haystack) {
           }
          }
       }
-
+	    
       if(color_varient != '' && color_varient != null && color_varient != 'undefiend'){
         var color_swatch = '<div class="collection_product_color_swatches"><ul>'+color_varient+'</ul></div>';
       }
@@ -183,7 +184,7 @@ function inArray(needle, haystack) {
     
     /* start-boost-custom */
     /* #boost-120981: wishlist integration */
-	var wishHtml = '<div class="custom_wishid_sec"><div class="zoomywishid zoomywishid-{{itemId}}" data-product-id="{{itemId}}" data-handle="{{itemHandle}}"  data-image="'+ Utils.getFeaturedImage(images, '360x')  +'"  data-variantname="'+ firstVariant.title +'" data-title="{{itemTitle}}" data-variant="'+ firstVariant.id +'" data-price="'+ Utils.formatMoney(firstVariant.price) +'"></div></div>';
+	var wishHtml = '<div class="zoomywishid zoomywishid-{{itemId}}" data-product-id="{{itemId}}" data-handle="{{itemHandle}}"  data-image="'+ Utils.getFeaturedImage(images, '360x')  +'"  data-variantname="'+ firstVariant.title +'" data-title="{{itemTitle}}" data-variant="'+ firstVariant.id +'" data-price="'+ Utils.formatMoney(firstVariant.price) +'"></div>';
     itemHtml = itemHtml.replace(/{{itemWishlist}}/g, wishHtml);
     /* end-boost-custom */
 
@@ -243,20 +244,6 @@ function inArray(needle, haystack) {
         'src="' + Utils.optimizeImage(images[0].src, '533x') + '" ' +
         'alt="' + imgAlt + '" />';
 
-      
-      	var jsonObj = [];
-        if(data.variants.length > 0){
-        	var varCount_length = data.variants.length;        	
-        	for (var p = 0; p < varCount_length; p++) {          
-        		var values = [];
-        		jsonObj.push({
-        			id: data.variants[p].id,
-        			stock: data.variants[p].inventory_quantity,
-        			inventory_management: data.variants[p].inventory_management
-        		});          
-        	} 
-        } 
-      
       if (activeSwapImage) {
         html += '<img class="motion-reduce"' +
         'loading="lazy"' +
@@ -268,7 +255,7 @@ function inArray(needle, haystack) {
         'alt="' + imgAlt + '" />';
       }
       html += '</div>';
-      html += "</div>";
+      html += '</div>';
     } else {
       html += `<div class="card__content">
                 <div class="card__information">
@@ -280,7 +267,6 @@ function inArray(needle, haystack) {
                 </div>
               </div>`;
     }
-    html += "<div class='quick-view-button' style='display:none;'><a class='quick-view' data-json='"+ JSON.stringify(jsonObj) +"' data-handle='"+data.handle+"' href='javascript:void(0);'>Quick View</a></div>";
     return html;
   }
 
@@ -586,4 +572,4 @@ function inArray(needle, haystack) {
   /* end-boost-custom */
   
 
-})();
+});

@@ -104,20 +104,7 @@
               {% endcomment %}
 
               {% assign blog_gallery_images = article.metafields.blog_gallery.image %}
-              {% assign blog_new_gallery = article.metafields.lifely_blog_gallery.new_lifely_gallery_image %}
-              {% if blog_new_gallery != blank and blog_new_gallery.size > 0 %}
-                <div class="article_banner_gallery"> 
-                  <div class="article_banner_gallery_slider">
-                    {% for blog_gallery_image in blog_new_gallery  %}
-                        {% if blog_gallery_image != blank  %}
-                          <div class="blog_gallery_item">
-                            <img src="{{ blog_gallery_image }}" alt="">
-                          </div>
-                        {% endif %}
-                    {% endfor %}
-                  </div>
-                </div>
-              {% elsif blog_gallery_images != blank %}
+              {% if blog_gallery_images != blank %}
                 <div class="article_banner_gallery"> 
                   <div class="article_banner_gallery_slider">
                     {% for blog_gallery_image in blog_gallery_images  %}

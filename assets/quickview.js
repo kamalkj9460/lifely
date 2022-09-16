@@ -7,15 +7,10 @@ $(document).ready(function () {
 });
 
 function quickView() {
-  $(document).on('click','.quick-view',function () {
-    $('.quick-view.active').removeClass('active');
-    $(this).addClass('active');
-    var json_p =  JSON.parse($(this).attr('data-json')); 
+  $(".quick-view").click(function () {
     if ($('#quick-view').length == 0){$("body").append('<div id="quick-view"></div>');}
     var product_handle = $(this).data('handle');
     $('#quick-view').addClass(product_handle);
-    var whislist_html = $(this).closest('li.grid__item').find('.custom_wishid_sec').html();
-    
     jQuery.getJSON('/products/' + product_handle + '.js', function (product) {
       var title = product.title;
       var type = product.type;
@@ -24,11 +19,11 @@ function quickView() {
       var desc = product.description;
       var images = product.images;
       var variants = product.variants;
-      var options = product.options; 
+      var options = product.options;
       var url = '/products/' + product_handle;
       $('.qv-product-title').text(title);
-      $('.quick_view_title_section .whislist_icon').html(whislist_html);
-      //$('.qv-product-description').html(desc);     
+      $('.qv-product-type').text(type);
+      $('.qv-product-description').html(desc);
       $('.view-product').attr('href', url);
       var imageCount = $(images).length;
       $(images).each(function (i, image) {
@@ -39,7 +34,7 @@ function quickView() {
 
           $('.qv-product-images').slick({
             'dots': false,
-            'arrows': true,
+            'arrows': false,
             'respondTo': 'min',
             'useTransform': false
           }).css('opacity', '1');
@@ -59,79 +54,23 @@ function quickView() {
         });
       });
       $(product.variants).each(function (i, v) {
-        var quan = 0;
-        for (var p = 0; p < json_p.length; p++){
-          if(json_p[p].id == v.id){
-            quan = json_p[p].stock;
-          }
-        }
-        if (quan < 1 && v.inventory_management == 'shopify' && v.available != true) {
+        if (v.inventory_quantity == 0) {
           $('.qv-add-button').prop('disabled', true).val('Sold Out');
+          $('.qv-add-to-cart').hide();
+          $('.qv-product-price').text('Sold Out').show();
+          return true
+        } else {
           price = parseFloat(v.price / 100).toFixed(2);
           original_price = parseFloat(v.compare_at_price / 100).toFixed(2);
+          $('.qv-product-price').text('$' + price);
           if (original_price > 0) {
-            $('.qv-product-price').html('<span>$' + price+'</span>');
-            $('.qv-product-original-price').html('<span>$' + original_price+'</span>').show();
+            $('.qv-product-original-price').text('$' + original_price).show();
           } else {
-             $('.qv-product-price').html('$' + price);
             $('.qv-product-original-price').hide();
           }
           $('select.option-0').val(v.option1);
           $('select.option-1').val(v.option2);
           $('select.option-2').val(v.option3);
-          $('.preorder_discout_bar').hide();
-          return false
-        }else if (quan < 1 && v.inventory_management == 'shopify' && v.available == true) {
-          $('.qv-add-button').prop('disabled', false).val('Pre Order');
-          price = parseFloat(v.price / 100).toFixed(2);
-          original_price = parseFloat(v.compare_at_price / 100).toFixed(2);
-          if (original_price > 0) {
-            $('.qv-product-price').html('<span>$' + price+'</span>');
-            $('.qv-product-original-price').html('<span>$' + original_price+'</span>').show();
-            if(original_price > price){
-              var discount = (parseFloat(original_price) - parseFloat(price)).toFixed(2);
-              var discount_bar = '<p class="pre_order_discount_text">Pre-Order now available! Wait &amp; Save extra $'+discount+'</p>';
-              $('.preorder_discout_bar').html(discount_bar);
-              $('.preorder_discout_bar').show();
-            }
-          } else {
-            $('.qv-product-price').html('$' + price);
-            $('.qv-product-original-price').hide();
-          }
-          $('select.option-0').val(v.option1);
-          $('select.option-1').val(v.option2);
-          $('select.option-2').val(v.option3);
-          return false
-        } else if(v.available == true) { 
-          price = parseFloat(v.price / 100).toFixed(2);
-          original_price = parseFloat(v.compare_at_price / 100).toFixed(2);
-          if (original_price > 0) {
-            $('.qv-product-price').html('<span>$' + price+'</span>');
-            $('.qv-product-original-price').html('<span>$' + original_price+'</span>').show();
-          } else {
-             $('.qv-product-price').html('$' + price);
-            $('.qv-product-original-price').hide();
-          }
-          $('select.option-0').val(v.option1);
-          $('select.option-1').val(v.option2);
-          $('select.option-2').val(v.option3);
-          $('.preorder_discout_bar').hide();
-          return false
-        }else{
-          $('.qv-add-button').prop('disabled', true).val('Sold Out');
-          price = parseFloat(v.price / 100).toFixed(2);
-          original_price = parseFloat(v.compare_at_price / 100).toFixed(2);
-          if (original_price > 0) {
-            $('.qv-product-price').html('<span>$' + price+'</span>');
-            $('.qv-product-original-price').html('<span>$' + original_price+'</span>').show();
-          } else {
-             $('.qv-product-price').html('$' + price);
-            $('.qv-product-original-price').hide();
-          }
-          $('select.option-0').val(v.option1);
-          $('select.option-1').val(v.option2);
-          $('select.option-2').val(v.option3);
-          $('.preorder_discout_bar').hide();
           return false
         }
       });
@@ -146,46 +85,24 @@ function quickView() {
           selectedOptions = selectedOptions + ' / ' + $(this).val();
         }
       });
-      var json_p =  JSON.parse($('.quick-view.active').attr('data-json')); 
-      var product_handle = $('.quick-view.active').data('handle');
       jQuery.getJSON('/products/' + product_handle + '.js', function (product) {
         $(product.variants).each(function (i, v) {
           if (v.title == selectedOptions) {
-            console.log(v);
-            var quan = 0;
-            for (var p = 0; p < json_p.length; p++){
-              if(json_p[p].id == v.id){
-                quan = json_p[p].stock;
-              }
-            }
-            
             var price = parseFloat(v.price / 100).toFixed(2);
-            var original_price = parseFloat(v.compare_at_price / 100).toFixed(2);            
-            var v_inv = v.inventory_management;           
-            if (original_price > 0) {
-              $('.qv-product-price').html('<span>$' + price+'</span>');
-              $('.qv-product-original-price').html('<span>$' + original_price+'</span>').show();
-            } else {
-               $('.qv-product-price').html('$' + price);
-              $('.qv-product-original-price').hide();
-            }            
+            var original_price = parseFloat(v.compare_at_price / 100).toFixed(2);
+            var v_qty = v.inventory_quantity;
+            var v_inv = v.inventory_management;
+            $('.qv-product-price').text('$' + price);
+            $('.qv-product-original-price').text('$' + original_price);
             if (v_inv == null) {
               $('.qv-add-button').prop('disabled', false).val('Add to Cart');
-            }else if (quan < 1 && v.inventory_management == 'shopify' && v.available != true) {
+            } else {
+              if (v.inventory_quantity < 1) {
                 $('.qv-add-button').prop('disabled', true).val('Sold Out');
-            }else if (quan < 1 && v.inventory_management == 'shopify' && v.available == true) {
-                 $('.qv-add-button').prop('disabled', false).val('Pre Order');
-                  if(original_price > price){
-                  var discount = (parseFloat(original_price) - parseFloat(price)).toFixed(2);
-                  var discount_bar = '<p class="pre_order_discount_text">Pre-Order now available! Wait &amp; Save extra $'+discount+'</p>';
-                  $('.preorder_discout_bar').html(discount_bar);
-                  $('.preorder_discout_bar').show();
-                }
-            } else if(v.available == true) { 
+              } else {
                 $('.qv-add-button').prop('disabled', false).val('Add to Cart');
-            }else{
-               $('.qv-add-button').prop('disabled', true).val('Sold Out');
-            }            
+              }
+            }
           }
         });
       });
@@ -247,25 +164,8 @@ function quickView() {
       },
       'afterClose': function () {
         $('#quick-view').removeClass().empty();
-        $('.quick-view.active').removeClass('active');
       }
     });
-
-    $('.quick_view_quantity button').on('click',function(e){
-        e.preventDefault();
-        var val = $('.quick_view_quantity input').val();
-        if(val == null || val == 'undefiend'){
-          val = 0;
-        }
-        if(val > 1 && $(this).hasClass('quick-qty-minus')){
-           val = parseInt(val) - parseInt(1);
-        }else if($(this).hasClass('qty-plus')){
-          val = parseInt(val) + parseInt(1);
-        }
-        $('.quick_view_quantity input').val(val);
-    });
-
-    
   });
 };
 
