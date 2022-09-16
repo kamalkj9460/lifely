@@ -1,0 +1,51 @@
+ {% if collection.title == 'Bedside Tables' or collection.handle == "side-coffee-tables" or collection.handle == "dining-tables" or collection.handle == "outdoor-sofa-lounges-set" or collection.handle == "desk" %}
+   {% assign description = collection.metafields.bottom.description %}
+    {% if description != blank  %}	
+    	   <div class="collection_subcategory_description" >
+              <div class="page-width">
+                  <div class="collection_subcategory_description_inner" {% if section.settings.color_code != blank%}style="background:{{section.settings.color_code}}"{% endif %}>
+    					 <div class="collection-hero__subdescription" {% if section.settings.text_color != blank%}style="color:{{section.settings.text_color}}"{% endif %}>{{ description }}</div>
+                  </div>  
+              </div>
+          </div>
+    {%- endif -%}
+{% else %}
+  {% assign description = collection.description %}
+  {% if description != blank  %}	
+  	   <div class="collection_subcategory_description" >
+            <div class="page-width">
+                <div class="collection_subcategory_description_inner" {% if section.settings.color_code != blank%}style="background:{{section.settings.color_code}}"{% endif %}>
+  					 <div class="collection-hero__subdescription" {% if section.settings.text_color != blank%}style="color:{{section.settings.text_color}}"{% endif %}>{{ description }}</div>
+                </div>  
+            </div>
+        </div>
+  {%- endif -%}
+{% endif %}
+
+  
+{% schema %}
+  {
+    "name": "Subcategory Description",
+    "class":"collection_subcategory_bottom_description_sec",
+    "settings": [
+		{
+          "id": "color_code",
+          "type": "color",
+          "label": "Background Color",
+		  "default":"#F9F1E5"
+        },
+		{
+		  "type": "color",	
+          "id": "text_color",
+          "label": "Text Color",
+		  "default":"#2C474B"	
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

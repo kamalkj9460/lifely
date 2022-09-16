@@ -1,0 +1,48 @@
+{% if section.settings.warranty_content != blank %}
+<div class="warranty-wrap">
+<div class="page-width">
+<div class="warranty-inner">
+  {{ section.settings.warranty_content }}
+</div>
+</div>
+</div>  
+<style>
+  .warranty-wrap .warranty-inner-content p {
+    font-size: 16px;
+  }
+  .warranty-wrap {
+    padding: 30px 0;
+  }
+  .warranty-wrap .heading-main {
+      margin-bottom: 30px;
+      font-weight: bold;
+  }
+  .warranty-wrap .warranty-inner-content ul li {
+      font-size: 14px;
+  }
+  .warranty-wrap .warranty-inner-content ul {
+      padding-left: 10px;
+  }  
+  
+</style>
+
+{% endif %}  
+
+{% schema %}
+	{
+		"name": "Warranty Content",
+		"settings": [
+			{
+				"id": "warranty_content",
+				"type": "html",
+				"label": "Warranty Content"
+			}
+		]
+	}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,70 @@
+{% if section.settings.heading != blank or  section.settings.subheading != blank %}
+  {% style %}
+      .master_campaign_coupon_inner_bar{
+         background: {{section.settings.background_color}};
+         padding:20px 0px;
+         margin-top: 50px;
+      }
+      .master_campaign_coupon_inner_bar h2{
+          font-family: 'Gellix';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 40px;
+          line-height: 45px;
+          text-transform: capitalize;
+          color: #F9F1E5;
+          margin-bottom: 0;
+      }
+      .master_campaign_coupon_inner_bar h3{
+          font-family: 'Gellix';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 40px;
+          line-height: 45px;
+          color: #F9F1E5;
+      }
+      @media only screen and (max-width: 991px){
+          .master_campaign_coupon_inner_bar{
+             margin-top: 20px;
+          }
+      }
+  {% endstyle %}  
+  <div class="master_campaign_coupon_inner_bar">
+    <div class="page-width">
+        <div class="text-center">
+            <h2>{{ section.settings.heading }}</h2>
+            <h3>{{ section.settings.subheading }}</h3>
+        </div>  
+    </div>
+   </div>  
+{% endif %}  
+{% schema %}
+  {
+    "name": "Coupon Bar",
+    "class":"master_campaign_coupon_bar",
+    "settings": [
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"Heading"
+      },
+      {
+        "type":"text",
+        "id":"subheading",
+        "label":"Heading"
+      },
+      {
+        "type":"color",
+        "id":"background_color",
+        "label":"Background Color",
+        "default":"#ffffff"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
